@@ -1,31 +1,31 @@
-# CI/CD Final Project
+# CI/CD Tools and Practices Final Project
 
-Project name: **CI/CD Tools and Practices Final Project**
+This repository contains the template to be used for the Final Project for the Coursera course **CI/CD Tools and Practices**.
 
-This repository contains the sample application and CI/CD configuration for the Coursera CI/CD Tools and Practices final project.
-
-## Continuous integration
-
-GitHub Actions is configured in `.github/workflows/workflow.yml` to install dependencies, lint the Python service with flake8, and run unit tests with nose.
-
-## OpenShift Pipelines
-
-Tekton task definitions are in `.tekton/tasks.yml`. They include a cleanup task and a nose unit-test task. The OpenShift pipeline uses cleanup, git-clone, flake8, nose, buildah, and deploy steps.
-
-## Application
-
-The application is packaged with the repository's Dockerfile and is configured to listen on port 8000 in the container.
+Repository name: `ci-cd-final-project`
 
 ## Setup
 
-Run the setup script in the lab environment:
+After entering the lab environment, run the setup script in the `./bin` folder to install the prerequisite software:
 
 ```bash
 bash bin/setup.sh
 ```
 
-Then start a new shell so the virtual environment can be activated.
+Then exit the shell and start a new one for the Python virtual environment to be activated.
+
+## Continuous integration
+
+The GitHub Actions workflow is located at `.github/workflows/workflow.yml`. It installs dependencies, runs flake8 lint checks, and runs unit tests with nose.
+
+## OpenShift Pipelines
+
+The Tekton task definitions are located at `.tekton/tasks.yml`. They include a cleanup task and a nose unit-test task.
 
 ## License
 
-Licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+Licensed under the Apache License. See [LICENSE](LICENSE).
+
+## Author
+
+Skills Network
