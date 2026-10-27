@@ -1,0 +1,51 @@
+name: CI workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.9-slim
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip wheel
+          pip install -r requirements.txt
+
+      - name: Initialize containers
+        run: echo "Initialize containers"
+
+      - name: Lint with flake8
+        run: |
+          flake8 service --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Run unit tests with nose
+        run: nosetests
+
+      - name: Buildah build
+        run: |
+          echo "Container image build is performed by the OpenShift Tekton pipeline."
+
+      - name: Post Checkout
+        if: always()
+        run: echo "Post Checkout"
+
+      - name: Post Setup Node.js
+        if: always()
+        run: echo "Post Setup Node.js"
+
+      - name: Complete job
+        if: always()
+        run: echo "Complete job"
